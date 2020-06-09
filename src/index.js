@@ -38,7 +38,7 @@ fetch(urlDanser)
     showDancer(dancer)
 })
 
-const sectionDancer = document.querySelector('.details')
+// const sectionDancer = document.querySelector('.details')
 
 function showDancer(dancer){
 
@@ -51,7 +51,7 @@ function showDancer(dancer){
   const pDancerDesc = document.querySelector('#dancer-description') 
   pDancerDesc.innerText = dancer.description
 
-  const divDancerLikes = document.querySelector('.likes') 
+  // const divDancerLikes = document.querySelector('.likes') 
   
   const spanDancerCount = document.querySelector('#like-count') 
   spanDancerCount.innerText = dancer.likes
@@ -82,8 +82,8 @@ function showDancer(dancer){
     e.preventDefault()
 
     // console.log(e.target[0].value)
-    // let feedback = []
-    let inputFeed = e.target[0].value
+    // let inputFeed = e.target[0].value
+    let inputFeed = inputFeedback.value
     let feedback = dancer.feedback.push(inputFeed)
 
 // debugger
@@ -107,11 +107,13 @@ function showDancer(dancer){
 
   })
 
-  const ulFeedback = document.querySelectorAll('ul')[1]
-  ulFeedback.innerHTML = ''
+  // const ulFeedback = document.querySelectorAll('ul')[1]
+  const ulFeedback = document.querySelector('.feedback ul')
+  ulFeedback.innerText = ''
+
   for(const liFeeds of dancer.feedback){
       const liFeedback = document.createElement('li')
-      console.log(liFeeds)
+      // console.log(liFeeds)
       liFeedback.innerText = liFeeds
       ulFeedback.append(liFeedback)
   }

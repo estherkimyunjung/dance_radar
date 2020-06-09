@@ -5,13 +5,12 @@
       "name": "Carlton",
       "image": "https://i.imgur.com/iM8ybeC.gif",
       "description": "20 years of experience in all forms of dance. Known for shiny outfits.",
-      "likes": 2,
+      "likes": 5,
       "feedback": [
         "Nice moves!",
         "Never stop never stopping",
         "Awesome moves !!!",
-        "Test again",
-        "Add more Feedback"
+        "Test again"
       ]
     },
     {
