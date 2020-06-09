@@ -10,9 +10,28 @@
 //   ]
 // }
 
-const url = 'http://localhost:3000/dancers/1'
+// const url = 'http://localhost:3000/dancers'
 
-fetch(url)
+// fetch(url)
+// .then(res => res.json())
+// .then(dancers => {
+//     // console.log(dancer)
+//     for(dancer of dancers){
+//       console.log(dancer)
+//       listDancer(dancer)
+//       showDancer(dancer)
+//     }
+// })
+
+// function listDancer(dancer){
+
+// }
+
+
+// const urlDanser = `http://localhost:3000/dancers/${dancer.id}`
+const urlDanser = 'http://localhost:3000/dancers/1'
+
+fetch(urlDanser)
 .then(res => res.json())
 .then(dancer => {
     // console.log(dancer)
@@ -39,15 +58,19 @@ function showDancer(dancer){
 
   const btnDancerUnlike = document.querySelector('#unlike')
   btnDancerUnlike.addEventListener('click',() => {
-    spanDancerCount.innerText = --dancer.likes
-    patchFetch(url)
+    if(dancer.likes > 0){
+      spanDancerCount.innerText = --dancer.likes
+      patchFetch(urlDanser)
+    } else {
+      spanDancerCount.innerText = 0
+    }
   
   })
 
   const btnDancerLike = document.querySelector('#like')
   btnDancerLike.addEventListener('click', () => {
     spanDancerCount.innerText = ++dancer.likes
-    patchFetch(url)
+    patchFetch(urlDanser)
   })
   
   const sectionFeedback = document.querySelector('.feedback') 
@@ -75,7 +98,7 @@ function showDancer(dancer){
       })
     }
 
-    fetch(url, options)
+    fetch(urlDanser, options)
     .then(res => res.json())
     .then(updateFeed => {
       showDancer(updateFeed)
@@ -106,7 +129,7 @@ function showDancer(dancer){
       })
     }
 
-    fetch(url, options)
+    fetch(urlDanser, options)
     .then(res => res.json())
   }
 
