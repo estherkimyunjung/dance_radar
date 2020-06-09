@@ -1,5 +1,18 @@
-const urlDanser = 'http://localhost:3000/dancers/1'
+const url = 'http://localhost:3000/dancers'
 
+fetch(url)
+.then(res => res.json())
+.then(dancers => {
+    for(dancer of dancers){
+      console.log(dancer)
+      showDancer(dancer)
+      const btnNavRight = document.querySelectorAll('nav button')[1]
+      btnNavRight.innerText = dancers[1].name
+    
+    }
+})
+
+const urlDanser = 'http://localhost:3000/dancers/1'
 
 function myFetch(urlDanser, options = {}){
   return fetch(urlDanser, options)
@@ -13,6 +26,9 @@ myFetch(urlDanser)
 })
 
 function showDancer(dancer){
+
+  const btnNavRight = document.querySelectorAll('nav button')[0]
+  btnNavRight.innerText = dancer.name
 
   const h2DancerName = document.querySelector('#dancer-name')
   h2DancerName.innerText = dancer.name
