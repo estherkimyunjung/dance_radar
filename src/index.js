@@ -1,48 +1,33 @@
-// {
-//   id: 1,
-//   name: "Carlton",
-//   image: "https://i.imgur.com/iM8ybeC.gif",
-//   description: "20 years of experience in all forms of dance. Known for shiny outfits.",
-//   likes: 23,
-//   feedback: [
-//     "Nice moves!",
-//     "Never stop never stopping"
-//   ]
-// }
+function myFetch(urlDanser, options = {}){
+  return fetch(urlDanser, options)
+  .then(res => res.json())
+}
 
 const url = 'http://localhost:3000/dancers'
 
-fetch(url)
-.then(res => res.json())
+myFetch(url)
 .then(dancers => {
     for(dancer of dancers){
-      console.log(dancer)
       showDancer(dancer)
+
       const btnNavRight = document.querySelectorAll('nav button')[1]
       btnNavRight.innerText = dancers[1].name
     
     }
 })
 
-// const urlDanser = `http://localhost:3000/dancers/${dancer.id}`
 const urlDanser = 'http://localhost:3000/dancers/1'
 
-const nav = document.querySelector('nav')
 
-fetch(urlDanser)
-.then(res => res.json())
+myFetch(urlDanser)
 .then(dancer => {
-  // console.log(dancer)
-  showDancer(dancer)
+    showDancer(dancer)
 })
-
-// const sectionDancer = document.querySelector('.details')
 
 function showDancer(dancer){
   const btnNavLeft = document.querySelectorAll('nav button')[0]
   btnNavLeft.innerText = dancer.name
 
-  
   const h2DancerName = document.querySelector('#dancer-name')
   h2DancerName.innerText = dancer.name
 
@@ -51,16 +36,15 @@ function showDancer(dancer){
   
   const pDancerDesc = document.querySelector('#dancer-description') 
   pDancerDesc.innerText = dancer.description
-
-  // const divDancerLikes = document.querySelector('.likes') 
-  
+ 
   const spanDancerCount = document.querySelector('#like-count') 
   spanDancerCount.innerText = dancer.likes
 
   const btnDancerUnlike = document.querySelector('#unlike')
+
   btnDancerUnlike.addEventListener('click',() => {
     if(dancer.likes > 0){
-      spanDancerCount.innerText = --dancer.likes
+      spanDancerCount.innerText = -- dancer.likes
       patchFetch(urlDanser)
     } else {
       spanDancerCount.innerText = 0
@@ -69,25 +53,21 @@ function showDancer(dancer){
   })
 
   const btnDancerLike = document.querySelector('#like')
+
   btnDancerLike.addEventListener('click', () => {
-    spanDancerCount.innerText = ++dancer.likes
+    spanDancerCount.innerText = ++ dancer.likes
     patchFetch(urlDanser)
   })
   
-  const sectionFeedback = document.querySelector('.feedback') 
   const formFeedback = document.querySelector('form') 
   const inputFeedback = document.querySelector('#new-feedback') 
-  const inputSubmit = document.querySelector('input[type="submit"]')
 
   formFeedback.addEventListener('submit', (e) => {
     e.preventDefault()
 
-    // console.log(e.target[0].value)
-    // let inputFeed = e.target[0].value
     let inputFeed = inputFeedback.value
     let feedback = dancer.feedback.push(inputFeed)
 
-// debugger
     const options = {
       method: 'PATCH',
       headers: {
@@ -99,8 +79,7 @@ function showDancer(dancer){
       })
     }
 
-    fetch(urlDanser, options)
-    .then(res => res.json())
+    myFetch(urlDanser, options)
     .then(updateFeed => {
       showDancer(updateFeed)
       formFeedback.reset()
@@ -108,18 +87,16 @@ function showDancer(dancer){
 
   })
 
-  // const ulFeedback = document.querySelectorAll('ul')[1]
   const ulFeedback = document.querySelector('.feedback ul')
   ulFeedback.innerText = ''
 
   for(const liFeeds of dancer.feedback){
       const liFeedback = document.createElement('li')
-      // console.log(liFeeds)
       liFeedback.innerText = liFeeds
       ulFeedback.append(liFeedback)
   }
 
-  function patchFetch(url){
+  function patchFetch(urlDanser){
 
     const options = {
       method: 'PATCH',
@@ -132,9 +109,7 @@ function showDancer(dancer){
       })
     }
 
-    fetch(urlDanser, options)
-    .then(res => res.json())
+    myFetch(urlDanser, options)
   }
 
 }
-
