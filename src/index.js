@@ -1,11 +1,15 @@
+function myFetch(urlDanser, options = {}){
+  return fetch(urlDanser, options)
+  .then(res => res.json())
+}
+
 const url = 'http://localhost:3000/dancers'
 
-fetch(url)
-.then(res => res.json())
+myFetch(url)
 .then(dancers => {
     for(dancer of dancers){
-      console.log(dancer)
       showDancer(dancer)
+
       const btnNavRight = document.querySelectorAll('nav button')[1]
       btnNavRight.innerText = dancers[1].name
     
@@ -13,11 +17,6 @@ fetch(url)
 })
 
 const urlDanser = 'http://localhost:3000/dancers/1'
-
-function myFetch(urlDanser, options = {}){
-  return fetch(urlDanser, options)
-  .then(res => res.json())
-}
 
 
 myFetch(urlDanser)
