@@ -10,7 +10,7 @@
 //   ]
 // }
 
-const url = 'http://localhost:3000/dancers/4'
+const url = 'http://localhost:3000/dancers/1'
 
 fetch(url)
 .then(res => res.json())
@@ -43,6 +43,7 @@ function showDancer(dancer){
     patchFetch(url)
   
   })
+
   const btnDancerLike = document.querySelector('#like')
   btnDancerLike.addEventListener('click', () => {
     spanDancerCount.innerText = ++dancer.likes
@@ -76,16 +77,13 @@ function showDancer(dancer){
 
     fetch(url, options)
     .then(res => res.json())
-    .then(updateFeed =>{
+    .then(updateFeed => {
       showDancer(updateFeed)
-      form.reset()
+      formFeedback.reset()
     })
-
 
   })
 
-
-  
   const ulFeedback = document.querySelectorAll('ul')[1]
   ulFeedback.innerHTML = ''
   for(const liFeeds of dancer.feedback){
@@ -94,7 +92,6 @@ function showDancer(dancer){
       liFeedback.innerText = liFeeds
       ulFeedback.append(liFeedback)
   }
-
 
   function patchFetch(url){
 
